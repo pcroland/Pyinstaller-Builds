@@ -10,8 +10,8 @@ jobs:
     strategy:
       matrix:
         include:
-          - { sys: mingw64, arch: 64bit, env: x86_64 }
-          - { sys: mingw32, arch: 32bit, env: i686 }
+          - { sys: mingw64, arch: 64bit, whl_tag: win_amd64, env: x86_64 }
+          - { sys: mingw32, arch: 32bit, whl_tag: win32, env: i686 }
     
     defaults:
       run:
@@ -57,12 +57,12 @@ jobs:
       #     destination_dir: ${{matrix.env}}
       #     keep_files: true
 
-      - name: Move dist/pyinstaller-6.3.0-py3-none-any.whl to pyinstaller-6.3.0-(x64|i686).whl
-        run: mv dist/pyinstaller-6.3.0-py3-none-any.whl pyinstaller-6.3.0-${{matrix.env}}.whl
+      - name: Move dist/pyinstaller-6.3.0-py3-none-any.whl to pyinstaller-6.3.0-py3-none-(win32|win64).whl
+        run: mv dist/pyinstaller-6.3.0-py3-none-any.whl pyinstaller-6.3.0-py3-none-${{matrix.whl_tag}}.whl
 
       - name: Upload release
         uses: softprops/action-gh-release@v1
         with:
           token: ${{ secrets.GH_TOKEN }}
           tag_name: PyInstaller
-          files: pyinstaller-6.3.0-${{matrix.env}}.whl
+          files: pyinstaller-6.3.0-py3-none-${{matrix.whl_tag}}.whl
