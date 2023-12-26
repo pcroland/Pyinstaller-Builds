@@ -44,10 +44,21 @@ jobs:
           python -m pip install wheel
           python setup.py sdist bdist_wheel
 
-      - name: Deploy
-        uses: peaceiris/actions-gh-pages@v3
+      - name: Build packages
+        run: |
+          ls ./dist
+
+      # - name: Deploy
+      #   uses: peaceiris/actions-gh-pages@v3
+      #   with:
+      #     github_token: ${{ secrets.GH_TOKEN }}
+      #     publish_dir: ./dist
+      #     destination_dir: ${{matrix.env}}
+      #     keep_files: true
+
+      - name: Upload release
+        uses: softprops/action-gh-release@v1
         with:
-          github_token: ${{ secrets.GH_TOKEN }}
-          publish_dir: ./dist
-          destination_dir: ${{matrix.env}}
-          keep_files: true
+          token: ${{ secrets.GH_TOKEN }}
+          tag_name: pyinstaller
+          files: ./dist
