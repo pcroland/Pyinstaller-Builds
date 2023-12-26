@@ -45,7 +45,7 @@ jobs:
           python -m pip install wheel
           python setup.py sdist bdist_wheel
 
-      - name: Build packages
+      - name: List ./dist
         run: |
           ls ./dist
 
