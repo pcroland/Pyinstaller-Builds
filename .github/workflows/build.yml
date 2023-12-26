@@ -1,5 +1,5 @@
 name: Build
-on: repository_dispatch
+on: workflow_dispatch
 
 jobs:
   build:
@@ -56,7 +56,7 @@ jobs:
       #     destination_dir: ${{matrix.env}}
       #     keep_files: true
 
-      - name: Move dist/pyinstaller-$version-py3-none-any.whl to pyinstaller-$version-(x64|i686).whl
+      - name: Move dist/pyinstaller-6.3.0-py3-none-any.whl to pyinstaller-6.3.0-(x64|i686).whl
         run: mv dist/pyinstaller-6.3.0-py3-none-any.whl pyinstaller-6.3.0-${{matrix.env}}.whl
 
       - name: Upload release
