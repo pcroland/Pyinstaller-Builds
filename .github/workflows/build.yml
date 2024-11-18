@@ -57,12 +57,12 @@ jobs:
       #     destination_dir: ${{matrix.env}}
       #     keep_files: true
 
-      - name: Move dist/pyinstaller-6.3.0-py3-none-any.whl to pyinstaller-6.3.0-py3-none-(win32|win64).whl
-        run: mv dist/pyinstaller-6.3.0-py3-none-any.whl pyinstaller-6.3.0-py3-none-${{matrix.whl_tag}}.whl
+      - name: Move dist/pyinstaller-6.11.1-py3-none-any.whl to pyinstaller-6.11.1-py3-none-(win32|win64).whl
+        run: mv dist/pyinstaller-6.11.1-py3-none-any.whl pyinstaller-6.11.1-py3-none-${{matrix.whl_tag}}.whl
 
       - name: Upload release
         uses: softprops/action-gh-release@v1
         with:
           token: ${{ secrets.GH_TOKEN }}
           tag_name: PyInstaller
-          files: pyinstaller-6.3.0-py3-none-${{matrix.whl_tag}}.whl
+          files: pyinstaller-6.11.1-py3-none-${{matrix.whl_tag}}.whl
